@@ -5,19 +5,18 @@ In this example a classifier is built that can distinguish
 names of beer from brand names of drugs.
 
 I wanted a somewhat realistic not canned example to learn
-basic classification and testing in sklearns.
+basic classification and testing in scikit-learns.
 
 The beer names act as corpus of non-medical words. The branded
 drugs are derived from a top 100 list of branded drugs.
 A more complete list of branded drugs could be derived from
- RxNorm current prescribe content.
+RxNorm current prescribe content.
 
 To run install pandas and sklearn (scikit) on your machine or use
-the ridiculously simple to use Anaconda python distribution.
+the simple to install Anaconda python distribution.
 
 I found that the ngram_range=(1,1) worked better as indicated by
-higer precision than eiter
-nagram_range(1,2) and ngram_range(2,2)
+higher precision than either nagram_range(1,2) and ngram_range(2,2)
 
 Branded drug names which are basically made up words for marketing
 purposes should have a different statistical pattern of
@@ -203,11 +202,13 @@ def main():
     drug_name_df = pd.DataFrame(random_drug_name_list, columns=["name"])
     beer_name_df = pd.DataFrame(random_beer_name_list, columns=["name"])
 
-    # drug_name_df["length"] = len(drug_name_df["name"])
-    # beer_name_df["length"] = len(beer_name_df["name"])
-    #
-    # print(drug_name_df["length"].value_counts(normalize=True))
-    # print(beer_name_df["length"].value_counts(normalize=True))
+    drug_name_df["name_length"] = drug_name_df["name"].apply(lambda x: len(x))
+    beer_name_df["name_length"] = beer_name_df["name"].apply(lambda x: len(x))
+
+    print("Frequency of different string lengths for brand drug names:")
+    print(drug_name_df["name_length"].value_counts(normalize=True))
+    print("Frequence of different string length for beer names:")
+    print(beer_name_df["name_length"].value_counts(normalize=True))
 
     drug_name_df["class"] = "brand drug"
     beer_name_df["class"] = "beer"
