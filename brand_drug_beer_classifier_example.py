@@ -21,87 +21,127 @@ higher precision than either nagram_range(1,2) and ngram_range(2,2)
 Branded drug names which are basically made up words for marketing
 purposes should have a different statistical pattern of
 character frequency. In the sample run of the program is given below the
-letter 'x' occurs in 2.3% of the characters and while in the
-beer names occurs in 0.3% of the characters.
+letter 'x' occurs in 2.4% of the characters and while in the
+beer names occurs in 0.1% of the characters.
 """
 
 """
 Frequency of characters in drug names:
-     0.235714
-a    0.103571
-e    0.066071
-n    0.060714
-i    0.058929
+     0.222222
+e    0.098148
+a    0.085185
+i    0.072222
+n    0.061111
+r    0.057407
 t    0.050000
-o    0.046429
-v    0.044643
-r    0.042857
-s    0.033929
-l    0.032143
-p    0.023214
-x    0.023214
-u    0.019643
-f    0.019643
-c    0.019643
-h    0.017857
-g    0.016071
-b    0.014286
-y    0.014286
-m    0.014286
-k    0.010714
-z    0.010714
-3    0.005357
-d    0.003571
-w    0.003571
--    0.003571
-1    0.001786
-j    0.001786
-q    0.001786
+s    0.038889
+o    0.035185
+l    0.035185
+v    0.033333
+c    0.027778
+x    0.024074
+p    0.022222
+h    0.016667
+m    0.016667
+d    0.016667
+u    0.016667
+b    0.014815
+g    0.012963
+f    0.009259
+z    0.007407
+k    0.007407
+3    0.005556
+y    0.003704
+-    0.003704
+q    0.001852
+1    0.001852
+w    0.001852
 dtype: float64
-Frequency of character in beer names:
-     0.267191
-e    0.101179
-a    0.068762
-r    0.054028
-l    0.053045
-i    0.052063
-o    0.049116
-t    0.047151
-b    0.034381
-n    0.034381
-s    0.031434
-c    0.025540
-u    0.024558
-d    0.024558
-p    0.023576
-h    0.021611
-f    0.012770
-k    0.012770
-m    0.012770
-w    0.010806
-g    0.009823
-y    0.007859
-x    0.002947
-9    0.002947
-.    0.002947
-z    0.002947
-j    0.001965
-q    0.001965
-'    0.001965
-v    0.000982
-1    0.000982
--    0.000982
+Frequency of characters in beer names:
+     0.272541
+e    0.094262
+a    0.073770
+l    0.055328
+o    0.051230
+t    0.046107
+i    0.045082
+r    0.044057
+s    0.040984
+n    0.034836
+b    0.027664
+p    0.026639
+c    0.022541
+h    0.022541
+u    0.018443
+m    0.017418
+y    0.017418
+d    0.016393
+g    0.013320
+w    0.011270
+k    0.009221
+f    0.009221
+z    0.005123
+v    0.005123
+"    0.002049
+\    0.002049
+-    0.002049
+0    0.002049
+1    0.002049
+.    0.001025
+)    0.001025
+(    0.001025
+x    0.001025
+2    0.001025
+7    0.001025
+6    0.001025
+j    0.001025
+5    0.001025
+dtype: float64
+Frequency of different string lengths for brand drug names:
+7     0.30
+8     0.18
+9     0.14
+6     0.14
+15    0.06
+18    0.04
+13    0.04
+10    0.04
+5     0.04
+11    0.02
+dtype: float64
+Frequency of different string length for beer names:
+12    0.12
+16    0.08
+8     0.08
+22    0.08
+17    0.08
+14    0.08
+10    0.06
+20    0.06
+15    0.06
+21    0.04
+19    0.04
+11    0.04
+6     0.02
+7     0.02
+9     0.02
+37    0.02
+33    0.02
+24    0.02
+25    0.02
+32    0.02
+3     0.02
 dtype: float64
              precision    recall  f1-score   support
 
-       beer       0.91      0.77      0.83        13
- brand drug       0.86      0.95      0.90        20
+       beer       0.93      0.82      0.87        17
+ brand drug       0.83      0.94      0.88        16
 
 avg / total       0.88      0.88      0.88        33
 
 Confusion matrix:
-[[10  3]
- [ 1 19]]
+[[14  3]
+ [ 1 15]]
 
 """
 
@@ -207,7 +247,7 @@ def main():
 
     print("Frequency of different string lengths for brand drug names:")
     print(drug_name_df["name_length"].value_counts(normalize=True))
-    print("Frequence of different string length for beer names:")
+    print("Frequency of different string length for beer names:")
     print(beer_name_df["name_length"].value_counts(normalize=True))
 
     drug_name_df["class"] = "brand drug"
