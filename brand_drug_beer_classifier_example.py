@@ -27,100 +27,126 @@ beer names occurs in 3% of the characters.
 
 """
 Frequency of characters in drug names:
-     0.230303
-a    0.092929
-i    0.072727
-e    0.070707
-n    0.066667
-s    0.050505
-r    0.044444
-o    0.044444
-t    0.042424
-l    0.036364
-x    0.030303
-c    0.028283
-v    0.026263
-p    0.026263
-y    0.020202
-g    0.018182
-b    0.018182
-z    0.014141
-u    0.014141
-d    0.012121
-3    0.008081
-f    0.006061
-h    0.006061
-m    0.006061
-1    0.004040
--    0.004040
-k    0.004040
-q    0.002020
+     0.221014
+e    0.083333
+a    0.074275
+i    0.063406
+t    0.063406
+n    0.063406
+s    0.056159
+l    0.052536
+o    0.052536
+r    0.043478
+c    0.034420
+v    0.032609
+p    0.021739
+b    0.019928
+x    0.018116
+u    0.018116
+g    0.014493
+y    0.014493
+m    0.012681
+h    0.012681
+d    0.010870
+w    0.005435
+z    0.005435
+q    0.003623
+j    0.001812
 dtype: float64
 Frequency of characters in beer names:
-()
+     0.275100
+e    0.088353
+a    0.083333
+r    0.064257
+l    0.053213
+o    0.047189
+t    0.046185
+i    0.035141
+b    0.034137
+s    0.031124
+c    0.029116
+n    0.027108
+h    0.025100
+p    0.023092
+u    0.020080
+d    0.020080
+k    0.019076
+w    0.015060
+g    0.014056
+y    0.012048
+m    0.011044
+z    0.005020
+f    0.004016
+.    0.003012
+v    0.003012
+j    0.002008
+-    0.002008
+'    0.002008
+x    0.001004
+7    0.001004
+4    0.001004
+/    0.001004
+!    0.001004
+dtype: float64
+
 Frequency of brand name / Frequency of beer name
 /Users/janos/anaconda/lib/python2.7/site-packages/pandas/core/config.py:570: DeprecationWarning: height has been deprecated.
 
   warnings.warn(d.msg, DeprecationWarning)
    frequency_b  frequency_d  ratio of frequency
-i     0.043436     0.072727            1.674343
-n     0.029923     0.066667            2.227957
-g     0.011583     0.018182            1.569697
-y     0.007722     0.020202            2.616162
-3     0.001931     0.008081            4.185859
-z     0.001931     0.014141            7.325253
-v     0.001931     0.026263           13.604040
-x     0.001931     0.030303           15.696970
-1     0.000965     0.004040            4.185859
--     0.000965     0.004040            4.185859
-q     0.000965     0.002020            2.092929
+i     0.035141     0.063406            1.804348
+s     0.031124     0.056159            1.804348
+n     0.027108     0.063406            2.338969
+v     0.003012     0.032609           10.826087
+x     0.001004     0.018116           18.043478
 
 Frequency of different string lengths for brand drug names:
-7     0.40
-6     0.20
-9     0.10
-8     0.08
-5     0.08
-15    0.06
-13    0.04
+7     0.42
+8     0.18
+15    0.10
+6     0.10
+18    0.06
+9     0.06
 10    0.04
+11    0.02
+5     0.02
 dtype: float64
 
 Frequency of different string length for beer names:
-10    0.12
-16    0.10
-21    0.08
-19    0.08
-28    0.08
-6     0.06
-12    0.06
+21    0.12
+11    0.08
+13    0.08
+25    0.06
+19    0.06
+18    0.06
+17    0.06
 14    0.06
-9     0.04
-11    0.04
-13    0.04
-31    0.04
-18    0.04
-17    0.04
-15    0.02
-22    0.02
-24    0.02
-25    0.02
-26    0.02
+16    0.04
+7     0.04
+20    0.04
+8     0.04
+15    0.04
+10    0.04
+5     0.02
+6     0.02
+34    0.02
+12    0.02
 27    0.02
+22    0.02
+23    0.02
+24    0.02
+3     0.02
 dtype: float64
              precision    recall  f1-score   support
 
-       beer       0.94      0.88      0.91        17
- brand drug       0.88      0.94      0.91        16
+       beer       1.00      0.88      0.94        17
+ brand drug       0.89      1.00      0.94        16
 
-avg / total       0.91      0.91      0.91        33
+avg / total       0.95      0.94      0.94        33
 
 Confusion matrix:
 [[15  2]
- [ 1 15]]
-
-Process finished with exit code 0
-
+ [ 0 16]]
 
 """
 
@@ -134,7 +160,7 @@ from sklearn import svm
 from sklearn.metrics import classification_report, confusion_matrix
 
 
-def read_top_100_drugs(filename="top_100_drugs.csv"):
+def read_top_100_drugs(filename="./fun_data/top_100_drugs.csv"):
     """List of 2013 top drugs from: http://www.medscape.com/viewarticle/820011
     Data is originally from IMS Health
     """
@@ -171,7 +197,7 @@ def read_beer_as_frame():
     """The CSV file "beers.csv" is from http://openbeerdb.com/
     which is licensed under the Open Drug Database.
     """
-    beers = pd.read_csv("beers.csv")
+    beers = pd.read_csv("./fun_data/beers.csv")
     return beers
 
 
@@ -218,7 +244,7 @@ def main():
     beer_character_df = get_characters_as_data_frame(random_beer_name_list)
     print("Frequency of characters in beer names:")
     beer_character_counts = beer_character_df["character"].value_counts(normalize=True)
-
+    print(beer_character_counts)
     beer_character_counts_df = pd.DataFrame(beer_character_counts, columns=["frequency_b"])
     drug_character_counts_df = pd.DataFrame(drug_character_counts, columns=["frequency_d"])
 
@@ -226,7 +252,7 @@ def main():
 
     bccd["ratio of frequency"] = bccd["frequency_d"] / bccd["frequency_b"]
 
-    print()
+    print("")
     print("Frequency of brand name / Frequency of beer name")
     print(bccd[bccd["ratio of frequency"] >= 1.5])
 
