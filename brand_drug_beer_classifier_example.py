@@ -21,127 +21,106 @@ higher precision than either nagram_range(1,2) and ngram_range(2,2)
 Branded drug names which are basically made up words for marketing
 purposes should have a different statistical pattern of
 character frequency. In the sample run of the program is given below the
-letter 'x' occurs in 2.4% of the characters and while in the
-beer names occurs in 0.1% of the characters.
+letter 'x' occurs in 0.1% of the characters and while in the
+beer names occurs in 3% of the characters.
 """
 
 """
 Frequency of characters in drug names:
-     0.222222
-e    0.098148
-a    0.085185
-i    0.072222
-n    0.061111
-r    0.057407
-t    0.050000
-s    0.038889
-o    0.035185
-l    0.035185
-v    0.033333
-c    0.027778
-x    0.024074
-p    0.022222
-h    0.016667
-m    0.016667
-d    0.016667
-u    0.016667
-b    0.014815
-g    0.012963
-f    0.009259
-z    0.007407
-k    0.007407
-3    0.005556
-y    0.003704
--    0.003704
-q    0.001852
-1    0.001852
-w    0.001852
+     0.230303
+a    0.092929
+i    0.072727
+e    0.070707
+n    0.066667
+s    0.050505
+r    0.044444
+o    0.044444
+t    0.042424
+l    0.036364
+x    0.030303
+c    0.028283
+v    0.026263
+p    0.026263
+y    0.020202
+g    0.018182
+b    0.018182
+z    0.014141
+u    0.014141
+d    0.012121
+3    0.008081
+f    0.006061
+h    0.006061
+m    0.006061
+1    0.004040
+-    0.004040
+k    0.004040
+q    0.002020
 dtype: float64
 Frequency of characters in beer names:
-     0.272541
-e    0.094262
-a    0.073770
-l    0.055328
-o    0.051230
-t    0.046107
-i    0.045082
-r    0.044057
-s    0.040984
-n    0.034836
-b    0.027664
-p    0.026639
-c    0.022541
-h    0.022541
-u    0.018443
-m    0.017418
-y    0.017418
-d    0.016393
-g    0.013320
-w    0.011270
-k    0.009221
-f    0.009221
-z    0.005123
-v    0.005123
-"    0.002049
-\    0.002049
--    0.002049
-0    0.002049
-1    0.002049
-.    0.001025
-)    0.001025
-(    0.001025
-x    0.001025
-2    0.001025
-7    0.001025
-6    0.001025
-j    0.001025
-5    0.001025
-dtype: float64
+()
+Frequency of brand name / Frequency of beer name
+/Users/janos/anaconda/lib/python2.7/site-packages/pandas/core/config.py:570: DeprecationWarning: height has been deprecated.
+
+  warnings.warn(d.msg, DeprecationWarning)
+   frequency_b  frequency_d  ratio of frequency
+i     0.043436     0.072727            1.674343
+n     0.029923     0.066667            2.227957
+g     0.011583     0.018182            1.569697
+y     0.007722     0.020202            2.616162
+3     0.001931     0.008081            4.185859
+z     0.001931     0.014141            7.325253
+v     0.001931     0.026263           13.604040
+x     0.001931     0.030303           15.696970
+1     0.000965     0.004040            4.185859
+-     0.000965     0.004040            4.185859
+q     0.000965     0.002020            2.092929
+
 Frequency of different string lengths for brand drug names:
-7     0.30
-8     0.18
-9     0.14
-6     0.14
+7     0.40
+6     0.20
+9     0.10
+8     0.08
+5     0.08
 15    0.06
-18    0.04
 13    0.04
 10    0.04
-5     0.04
-11    0.02
 dtype: float64
+
 Frequency of different string length for beer names:
-12    0.12
-16    0.08
-8     0.08
-22    0.08
-17    0.08
-14    0.08
-10    0.06
-20    0.06
-15    0.06
-21    0.04
-19    0.04
+10    0.12
+16    0.10
+21    0.08
+19    0.08
+28    0.08
+6     0.06
+12    0.06
+14    0.06
+9     0.04
 11    0.04
-6     0.02
-7     0.02
-9     0.02
-37    0.02
-33    0.02
+13    0.04
+31    0.04
+18    0.04
+17    0.04
+15    0.02
+22    0.02
 24    0.02
 25    0.02
-32    0.02
-3     0.02
+26    0.02
+27    0.02
 dtype: float64
              precision    recall  f1-score   support
 
-       beer       0.93      0.82      0.87        17
- brand drug       0.83      0.94      0.88        16
+       beer       0.94      0.88      0.91        17
+ brand drug       0.88      0.94      0.91        16
 
-avg / total       0.88      0.88      0.88        33
+avg / total       0.91      0.91      0.91        33
 
 Confusion matrix:
-[[14  3]
+[[15  2]
  [ 1 15]]
+
+Process finished with exit code 0
+
 
 """
 
@@ -230,25 +209,42 @@ def main():
     drug_character_df = get_characters_as_data_frame(random_drug_name_list)
 
     print("Frequency of characters in drug names:")
-    print(drug_character_df["character"].value_counts(normalize=True))
+    drug_character_counts = drug_character_df["character"].value_counts(normalize=True)
+    print(drug_character_counts)
 
     beers = read_beer_as_frame()
 
     random_beer_name_list = get_random_n_cleaned_names(beers["name"], n=50)
     beer_character_df = get_characters_as_data_frame(random_beer_name_list)
     print("Frequency of characters in beer names:")
-    print(beer_character_df["character"].value_counts(normalize=True))
+    beer_character_counts = beer_character_df["character"].value_counts(normalize=True)
+
+    beer_character_counts_df = pd.DataFrame(beer_character_counts, columns=["frequency_b"])
+    drug_character_counts_df = pd.DataFrame(drug_character_counts, columns=["frequency_d"])
+
+    bccd = beer_character_counts_df.join(drug_character_counts_df)
+
+    bccd["ratio of frequency"] = bccd["frequency_d"] / bccd["frequency_b"]
+
+    print()
+    print("Frequency of brand name / Frequency of beer name")
+    print(bccd[bccd["ratio of frequency"] >= 1.5])
 
     drug_name_df = pd.DataFrame(random_drug_name_list, columns=["name"])
     beer_name_df = pd.DataFrame(random_beer_name_list, columns=["name"])
 
     drug_name_df["name_length"] = drug_name_df["name"].apply(lambda x: len(x))
     beer_name_df["name_length"] = beer_name_df["name"].apply(lambda x: len(x))
-
+    print("")
     print("Frequency of different string lengths for brand drug names:")
-    print(drug_name_df["name_length"].value_counts(normalize=True))
+    drug_name_letter_frequency = drug_name_df["name_length"].value_counts(normalize=True)
+
+    print(drug_name_letter_frequency)
+    print("")
+
     print("Frequency of different string length for beer names:")
-    print(beer_name_df["name_length"].value_counts(normalize=True))
+    beer_name_letter_frequency = beer_name_df["name_length"].value_counts(normalize=True)
+    print(beer_name_letter_frequency)
 
     drug_name_df["class"] = "brand drug"
     beer_name_df["class"] = "beer"
