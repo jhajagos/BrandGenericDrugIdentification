@@ -160,7 +160,7 @@ from sklearn import svm
 from sklearn.metrics import classification_report, confusion_matrix
 
 
-def read_top_100_drugs(filename="./fun_data/top_100_drugs.csv"):
+def read_top_100_drugs(filename="./data/top_100_drugs.csv"):
     """List of 2013 top drugs from: http://www.medscape.com/viewarticle/820011
     Data is originally from IMS Health
     """
@@ -195,9 +195,9 @@ def build_frequency_list(name_list):
 
 def read_beer_as_frame():
     """The CSV file "beers.csv" is from http://openbeerdb.com/
-    which is licensed under the Open Drug Database.
+    which is licensed under the Open Database License.
     """
-    beers = pd.read_csv("./fun_data/beers.csv")
+    beers = pd.read_csv("./data/beers.csv")
     return beers
 
 

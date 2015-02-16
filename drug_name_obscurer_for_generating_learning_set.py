@@ -62,12 +62,14 @@ TOKEN_TEMPLATES = [["BRAND_NAME"], ["GENERIC_NAME"], ["STRENGTH_UNIT", "BRAND_NA
                    ["ROUTE", "GENERIC_NAME", "STRENGTH_UNIT", "FREQUENCY"],
                    ["ROUTE", "GENERIC_NAME", "STRENGTH_UNIT", "FREQUENCY"],
                    ["BRAND_NAME", "(", "GENERIC_NAME", ")"],
-                   ["BRAND_NAME", "-", "GENERIC_NAME"]
+                   ["BRAND_NAME", "(", "GENERIC_NAME", ")", "STRENGTH_UNIT", "FORM", "-"],
+                   ["BRAND_NAME", "-", "GENERIC_NAME"],
+                   ["ROUTE", "GENERIC_NAME", "STRENGTH_UNIT", "FREQUENCY"],
                    ]
 
 SPELLING_ERROR_RATE = [0.99, 0.995, 1.00]
 SPACING_PROBABILITY = [0.99, 0.995, 1.00]
-SPACING_BEFORE_AFTER = {"(": (1, 0), ")": (0, 1), "-": (1, 1)}
+SPACING_BEFORE_AFTER = {"(": (1, 0), ")": (0, 1), "-": (1, 1), ",": (0, 1)}
 
 
 def generate_collapsed_drug_name(drug_detail_dict, token_pattern):
@@ -108,7 +110,7 @@ def generate_collapsed_drug_name(drug_detail_dict, token_pattern):
 
 if __name__ == "__main__":
     drug_dict = {"GENERIC_NAME": "Atorvastatin", "BRAND_NAME": "LIPITOR", "STRENGTH": "10", "UNIT": "mg", "FREQUENCY": "once daily",
-                 "STRENGTH_UNIT": "5MG"}
+                 "STRENGTH_UNIT": "5MG", "ROUTE": "ORAL", "FORM": "TABLET"}
 
     print(drug_dict)
     print(generate_collapsed_drug_name(drug_dict,  ["GENERIC_NAME", "STRENGTH", "UNIT"]))
